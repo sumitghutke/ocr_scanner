@@ -1,5 +1,7 @@
 flask
-google-generativeai
+flask-cors
+easyocr
+numpy
 pdf2image
 weasyprint
 Pillow
