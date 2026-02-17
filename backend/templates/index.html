@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI OCR Scanner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="text-center">
+            <div class="spinner mb-3"></div>
+            <h3>Processing Document...</h3>
+            <p>This may take a minute depending on the file size.</p>
+        </div>
+    </div>
+
+    <div class="container header">
+        <h1>AI OCR Scanner</h1>
+        <p class="subtitle">Convert Handwritten PDFs & Tables to Digital Formats with Super-Human Accuracy</p>
+    </div>
+
+    <div class="container container-sm">
+        <div class="card">
+            <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+                <div class="upload-area" id="dropZone">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Drag & Drop your PDF here</h3>
+                    <p>or click to browse</p>
+                    <input type="file" name="file" id="fileInput" accept=".pdf" required>
+                </div>
+                <!-- Hidden generic submit button (triggered by JS) -->
+                <!-- <button type="submit" class="btn">Upload</button> -->
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const uploadForm = document.getElementById('uploadForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            fileInput.files = e.dataTransfer.files;
+            submitForm();
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                submitForm();
+            }
+        });
+
+        function submitForm() {
+            loadingOverlay.style.display = 'flex';
+            uploadForm.submit();
+        }
+    </script>
+</body>
+
+</html>

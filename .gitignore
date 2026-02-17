@@ -1,0 +1,23 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/uploads/*
+backend/results/*
+!backend/uploads/.gitkeep
+!backend/results/.gitkeep
+backend/.env
+backend/*.pyc
+
+# Flutter
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.idea/
+mobile/.metadata
+mobile/build/
+mobile/pubspec.lock
+mobile/*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
